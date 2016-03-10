@@ -24,34 +24,33 @@ function init() {
       .linkDistance(30)
       .size([width, height]);
 
-  d3.json('data/miserables.json', function(error, graph) {
-    force
-        .nodes(graph.nodes)
-        .links(graph.links)
-        .start();
+  var graph = data;
 
-    var link = svg.selectAll('line')
-        .data(graph.links)
-      .enter().append('line')
-        .style('stroke-width', 2);
+  force
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .start();
 
-    var node = svg.selectAll('circle')
-        .data(graph.nodes)
-      .enter()
-        .append('circle')
-        .attr('r', 5)
-        .style('fill', function(d) { return color(d.group); })
-        .call(force.drag);
+  var link = svg.selectAll('line')
+      .data(graph.links)
+    .enter().append('line')
+      .style('stroke-width', 2);
 
-    force.on('tick', function() {
-      link.attr('x1', function(d) { return d.source.x; })
-          .attr('y1', function(d) { return d.source.y; })
-          .attr('x2', function(d) { return d.target.x; })
-          .attr('y2', function(d) { return d.target.y; });
+  var node = svg.selectAll('circle')
+      .data(graph.nodes)
+    .enter()
+      .append('circle')
+      .attr('r', 5)
+      .style('fill', function(d) { return color(d.group); })
+      .call(force.drag);
 
-      node.attr('cx', function(d) { return d.x; })
-          .attr('cy', function(d) { return d.y; });
-    });
+  force.on('tick', function() {
+    link.attr('x1', function(d) { return d.source.x; })
+        .attr('y1', function(d) { return d.source.y; })
+        .attr('x2', function(d) { return d.target.x; })
+        .attr('y2', function(d) { return d.target.y; });
+
+    node.attr('cx', function(d) { return d.x; })
+        .attr('cy', function(d) { return d.y; });
   });
-
 }

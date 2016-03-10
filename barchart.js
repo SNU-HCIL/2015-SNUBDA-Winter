@@ -30,5 +30,4 @@ function init() {
       .attr('transform', function(d, i){
         return 'translate(0,' + i * 30 + ')';
       });
-
 }
