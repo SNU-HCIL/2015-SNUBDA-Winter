@@ -29,14 +29,14 @@ function init() {
       nodes = miserables.nodes,
       n = nodes.length;
 
-  // Compute index per node.
+  // 각 노드별로 인덱스 계산
   nodes.forEach(function(node, i) {
     node.index = i;
     node.count = 0;
     matrix[i] = d3.range(n).map(function(j) { return {x: j, y: i, z: 0}; });
   });
 
-  // Convert links to matrix; count character occurrences.
+  // 캐릭터가 함께 등장하는 개수를 누적하여 행렬을 만듦
   miserables.links.forEach(function(link) {
     matrix[link.source][link.target].z += link.value;
     matrix[link.target][link.source].z += link.value;
@@ -46,14 +46,13 @@ function init() {
     nodes[link.target].count += link.value;
   });
 
-  // Precompute the orders.
+  // 순서 계산
   var orders = {
     name: d3.range(n).sort(function(a, b) { return d3.ascending(nodes[a].name, nodes[b].name); }),
-    count: d3.range(n).sort(function(a, b) { return nodes[b].count - nodes[a].count; }),
     group: d3.range(n).sort(function(a, b) { return nodes[b].group - nodes[a].group; })
   };
 
-  // The default sort order.
+  // 기본은 이름순으로 소팅
   x.domain(orders.name);
 
   svg.append("rect")
@@ -141,5 +140,5 @@ function init() {
 
   var timeout = setTimeout(function() {
     order("group");
-  }, 5000);
+  }, 3000);
 }
