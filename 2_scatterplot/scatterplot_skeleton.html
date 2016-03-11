@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      svg {
+        font: 10px sans-serif;
+      }
+
+      .axis path,
+      .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+      }
+
+      .dot {
+        stroke: #000;
+      }
+
+      .brush rect{
+        opacity: 0.2;
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="550" height="550"></svg>
+    <p>
+      MEAN(width) = <span id="mean-width"></span>, MEAN(length) = <span id="mean-length"></span>
+    </p>
+    <script src="../lib/d3.v3.min.js" charset="utf-8"></script>
+    <script src="../data/iris.js" charset="utf-8"></script>
+    <script src="scatterplot_skeleton.js" charset="utf-8"></script>
+  </body>
+</html>
